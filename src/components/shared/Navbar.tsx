@@ -19,25 +19,33 @@ import Login from "@/pages/Auth/Login";
 
 import { Menu } from "lucide-react";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
-    <nav className="py-3 px-2 flex items-center justify-between bg-red-300 ">
+    <nav className="py-3 px-2 flex items-center justify-between  ">
       {/* LOGO */}
-      <div className="">
-        <NavLink to={"/"}> Logo </NavLink>
+      <div className="font-semibold text-xl">
+        <NavLink to={"/"}> BookMyPlay </NavLink>
       </div>
 
       {/* DESKTOP MENU */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block ">
         <NavigationMenu>
           <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link to={"/"}>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            <NavigationMenuItem >
+              <NavLink to={"/about"} className="px-3 font-medium hover:font-semibold hover:text-green-600 duration-150">
+                <NavigationMenuLink >
                   About Us
                 </NavigationMenuLink>
-              </Link>
+              </NavLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem >
+              <NavLink to={"/contact"} className="px-3 font-medium hover:font-semibold hover:text-green-600 duration-150">
+                <NavigationMenuLink >
+                  Contact Us
+                </NavigationMenuLink>
+              </NavLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
@@ -66,7 +74,9 @@ const Navbar = () => {
       {/* LOGIN LOGOUT PROFILE */}
       <div className="flex items-center lg:gap-4">
         <ThemeSwitcher />
+        <Button variant={"outline"}>
         <Login />
+        </Button>
       </div>
     </nav>
   );

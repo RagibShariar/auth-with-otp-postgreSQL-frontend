@@ -8,7 +8,7 @@ const MainLayout: React.FC = () => {
   useTheme();
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="">
       <Navbar />
       <Outlet />
     </div>
