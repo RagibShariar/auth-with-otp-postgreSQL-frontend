@@ -30,10 +30,11 @@ const HeroSection = () => {
             />
           </div>
         </div>
-        <div className="hidden lg:block absolute bottom-48 left-32 size-20 rounded-full bg-[#aaf40c]"></div>
-        <div className="hidden lg:block absolute bottom-48 left-36">
+
+        <div className="hidden lg:block absolute top-72 left-36">
           <img src={bannerCock2} alt="" />
         </div>
+
         <div className=" hidden lg:block absolute top-48 left-1/3">
           <img src={bannerCock1} alt="" />
         </div>
