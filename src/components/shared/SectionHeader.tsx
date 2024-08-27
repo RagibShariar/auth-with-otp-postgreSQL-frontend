@@ -27,7 +27,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
           />
         </h1>
       </div>
-      <p className="text-gray-500 text-lg font-medium">{description}</p>
+      <p className="lg:w-[700px] px-2 mx-auto text-gray-500 text-lg font-medium">{description}</p>
     </div>
   );
 };

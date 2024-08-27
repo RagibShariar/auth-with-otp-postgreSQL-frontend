@@ -1,19 +1,28 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLoginMutation } from "@/redux/api/auth/authApi";
-import { setUser, TUser, useCurrentToken } from "@/redux/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { setUser, TUser } from "@/redux/features/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { MdErrorOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-const Login = () => {
+const LoginModal = () => {
   const {
     register,
     handleSubmit,
@@ -23,14 +32,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [login] = useLoginMutation();
-  const token = useAppSelector(useCurrentToken);
   // console.log("from useLoginMutation", { isError, isLoading, isSuccess, error});
-
-  useEffect(() => {
-    if (token && token !== null) {
-      navigate("/");
-    }
-  }, []);
 
   const handleLogin = async (data: FieldValues) => {
     const toastId = toast.loading("Logging in...");
@@ -53,12 +55,22 @@ const Login = () => {
   };
 
   return (
-    <section className="lg:mt-16 lg:w-[450px] md:w-1/2 mx-auto lg:border lg:rounded-xl lg:shadow-md bg-gradient">
-      <div className="bg-white lg:m-1 lg:rounded-lg px-4 py-5 mx-auto">
-        <h4 className=" text-2xl font-semibold">Login</h4>
-        <p>Enter your email below to login to your account</p>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Link to="">Login</Link>
+      </DialogTrigger>
+      <DialogContent
+        className="sm:max-w-[425px]"
+        onInteractOutside={(e) => e.preventDefault()}
+      >
+        <DialogHeader className="mb-4">
+          <DialogTitle className=" text-2xl font-semibold">Login</DialogTitle>
+          <DialogDescription>
+            Enter your email below to login to your account
+          </DialogDescription>
+        </DialogHeader>
 
-        <form onSubmit={handleSubmit(handleLogin)} className=" ">
+        <form onSubmit={handleSubmit(handleLogin)}>
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -102,15 +114,26 @@ const Login = () => {
           Login with Google
         </Button>
         <div className="mt-4 text-center text-sm flex items-center justify-center">
-          <div>
+          <DialogFooter>
             Don&apos;t have an account?{" "}
-            <Link to="/signUp" className="ml-2 underline">
-              Sign up
-            </Link>
-          </div>
+            <DialogClose asChild>
+              <Link to="/signUp" className="ml-2 underline">
+                Sign up
+              </Link>
+            </DialogClose>
+          </DialogFooter>
         </div>
-      </div>
-    </section>
+
+        {/* <DialogFooter className="mt-4">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+          <Button type="submit">Save changes</Button>
+        </DialogFooter> */}
+      </DialogContent>
+    </Dialog>
   );
 };
-export default Login;
+export default LoginModal;

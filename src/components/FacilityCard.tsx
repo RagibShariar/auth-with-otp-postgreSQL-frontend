@@ -4,7 +4,7 @@ import { Separator } from "./ui/separator";
 
 function FacilityCard() {
   return (
-    <div className="facilityCard max-w-sm mx-3 lg:mx-0 rounded-lg shadow-lg  overflow-hidden dark:border dark:text-gray-300 ">
+    <div className=" facilityCard max-w-sm mx-3 lg:mx-0 rounded-lg shadow-lg  overflow-hidden dark:border dark:text-gray-300 ">
       <div className="relative overflow-hidden">
         <Link to={""}>
           <img

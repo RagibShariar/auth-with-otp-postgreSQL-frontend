@@ -1,36 +1,59 @@
 import MainLayout from "@/layout/MainLayout";
-import Login from "@/pages/Auth/Login";
+import AboutUs from "@/pages/AboutUs/AboutUs";
+import { Dashboard } from "@/pages/Admin/Dashboard";
+import SignUp from "@/pages/Auth/SignUp";
+import ContactUs from "@/pages/ContactUs/ContactUs";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import SignUp from "@/pages/Auth/SignUp";
-import AboutUs from "@/pages/AboutUs/AboutUs";
-import ContactUs from "@/pages/ContactUs/ContactUs";
+import { adminPaths } from "./admin.routes";
+import AdminRoutes from "./AdminRoutes";
+import ProtectedRoutes from "./ProtectedRoutes";
+import Login from "@/pages/Auth/Login";
+import LoginModal from "@/pages/Auth/LoginModal";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <div>Error</div>,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
-        path: "/about",
+        path: "about",
         element: <AboutUs />,
       },
       {
-        path: "/contact",
-        element: <ContactUs />,
+        path: "contact",
+        element: (
+          <ProtectedRoutes>
+            <ContactUs />
+          </ProtectedRoutes>
+        ),
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />,
       },
       {
-        path: "/signUp",
-        element: <SignUp/>
-      }
+        path: "login1",
+        element: <LoginModal />,
+      },
+      {
+        path: "signUp",
+        element: <SignUp />,
+      },
     ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <AdminRoutes>
+        <Dashboard />
+      </AdminRoutes>
+    ),
+    children: adminPaths,
   },
 ]);

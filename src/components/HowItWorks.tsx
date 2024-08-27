@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 const HowItWorks = () => {
   return (
     <>
-      <section className="py-10 lg:pb-20">
+      <section className="py-10 lg:pb-10">
         <SectionHeader
           title1="How It "
           title2="Works"
