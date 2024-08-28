@@ -43,7 +43,8 @@ const Login = () => {
       const res = await login(loginInfo).unwrap();
       const user = jwtDecode(res.token) as TUser;
 
-      // console.log(user)
+      console.log("login page: ",res)
+
       dispatch(setUser({ user: user, token: res.token }));
       toast.success("Login Successful", { id: toastId, duration: 2000 });
       navigate("/");

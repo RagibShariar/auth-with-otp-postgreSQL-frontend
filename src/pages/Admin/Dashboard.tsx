@@ -1,8 +1,10 @@
 import {
   Bell,
   CircleUser,
+  Clock3,
   Home,
   LineChart,
+  LogOut,
   Menu,
   Package,
   Package2,
@@ -30,9 +32,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { useAppDispatch } from "@/redux/hooks";
+import { logOut } from "@/redux/features/authSlice";
+import { toast } from "sonner";
 
 export function Dashboard() {
+  const dispatch = useAppDispatch();
+
+
+
+  const handleLogOut = () => {
+    dispatch(logOut());
+    toast.success("Logged Out Successfully");
+  };
+
+
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-muted/40 md:block">
@@ -49,37 +64,46 @@ export function Dashboard() {
           </div>
           <div className="flex-1">
             <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              <NavLink
+                to="/admin/welcome"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive ? "bg-muted text-primary" : ""
+                  }`
+                }
               >
                 <Home className="h-4 w-4" />
                 Dashboard
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+              </NavLink>
+              <NavLink
+                to="/admin/bookings"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive ? "bg-muted text-primary" : ""
+                  }`
+                }
               >
-                <ShoppingCart className="h-4 w-4" />
-                Orders
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                  6
-                </Badge>
-              </Link>
-              <Link
-                to="#"
-                className="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
+                <Clock3 className="h-4 w-4" />
+                Bookings
+              </NavLink>
+              <NavLink
+                to="/admin/facilities"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary ${
+                    isActive ? "bg-muted text-primary" : ""
+                  }`
+                }
               >
                 <Package className="h-4 w-4" />
-                Products{" "}
-              </Link>
-              <Link
+                Facilities{" "}
+              </NavLink>
+              <NavLink
                 to="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
               >
                 <Users className="h-4 w-4" />
                 Customers
-              </Link>
+              </NavLink>
               <Link
                 to="#"
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
@@ -208,33 +232,19 @@ export function Dashboard() {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogOut}>
+                  <LogOut size={17} className="mr-2" />
+                    <button>Logout</button>
+                </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+        <main className="p-4 lg:p-6">
+          <div>
+            
           <Outlet />
-          {/* <div className="flex items-center justify-between">
-            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
-            <Button className="mt-4">Add Venues</Button>
           </div>
-          <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-            x-chunk="dashboard-02-chunk-1"
-          >
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h3 className="text-2xl font-bold tracking-tight">
-                You have no products
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                You can start selling as soon as you add a product.
-              </p>
-              <Button className="mt-4">Add Venues</Button>
-            </div>
-          </div> */}
         </main>
       </div>
     </div>

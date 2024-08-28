@@ -4,7 +4,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import {
   Sheet,
@@ -58,6 +58,14 @@ const Navbar = () => {
                   className="px-3 font-medium hover:font-semibold hover:text-[#aaf40c] duration-150"
                 >
                   <NavigationMenuLink>About Us</NavigationMenuLink>
+                </NavLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavLink
+                  to={"/facilities"}
+                  className="px-3 font-medium hover:font-semibold hover:text-[#aaf40c] duration-150"
+                >
+                  <NavigationMenuLink>Facilities</NavigationMenuLink>
                 </NavLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
@@ -118,12 +126,8 @@ const Navbar = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <NotebookPen size={17} className="mr-2" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Gauge size={17} className="mr-2" />
-                  Dashboard
+                  <Link to="/profile" className="flex"><NotebookPen size={17} className="mr-2" />
+                  Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogOut}>

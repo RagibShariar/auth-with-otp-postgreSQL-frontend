@@ -1,26 +1,142 @@
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useCreateFacilityMutation } from "@/redux/api/facilityApi/facilityApi";
+import { ChevronLeft, CirclePlus } from "lucide-react";
+import { FieldValues, useForm } from "react-hook-form";
+import { MdErrorOutline } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const AddFacility = () => {
+  const navigate = useNavigate();
+  const [createFacility] = useCreateFacilityMutation();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const handleAddFacility = async (data: FieldValues) => {
+    const toastId = toast.loading("Adding facility...");
+
+    try {
+      const newFacility = {
+        name: data.name,
+        description: data.description,
+        pricePerHour: Number(data.pricePerHour),
+        location: data.location,
+        imageUrl: data.imageUrl,
+      };
+      const res = await createFacility(newFacility);
+      console.log(res.data.success);
+      if (res.data.success === true) {
+        toast.success("Facility added successfully", { id: toastId });
+        reset();
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Try Again!", { id: toastId });
+    }
+  };
+
   return (
     <>
-      <div>AddFacility Page</div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
-        <Button className="mt-4">Add Venues</Button>
+      <div className="mb-16 flex items-center justify-between">
+      <Button onClick={()=>navigate(-1)} className=""> <ChevronLeft size={15} className="mr-2"/>Go Back</Button>
       </div>
-      <div
-        className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-        x-chunk="dashboard-02-chunk-1"
-      >
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h3 className="text-2xl font-bold tracking-tight">
-            You have no products
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            You can start selling as soon as you add a product.
-          </p>
-          <Button className="mt-4">Add Venues</Button>
-        </div>
+      
+      <div className=" lg:max-w-2xl mx-auto">
+        <Card className="w-full ">
+          <CardHeader>
+            <CardTitle className="text-2xl">Add New Facility</CardTitle>
+            <CardDescription>Add new facility to database.</CardDescription>
+          </CardHeader>
+          <form onSubmit={handleSubmit(handleAddFacility)}>
+            <CardContent className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  {...register("name", { required: true })}
+                  id="name"
+                  type="text"
+                  placeholder="Facility Name"
+                />
+                {errors.name && (
+                  <span className="text-sm text-red-500 flex items-center">
+                    <MdErrorOutline className="mr-1" /> This field is required
+                  </span>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="description">description</Label>
+                <Textarea
+                  {...register("description", { required: true })}
+                  placeholder="Facility description"
+                />
+                {errors.description && (
+                  <span className="text-sm text-red-500 flex items-center">
+                    <MdErrorOutline className="mr-1" /> This field is required
+                  </span>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="pricePerHour">Price per Hour</Label>
+                <Input
+                  {...register("pricePerHour", { required: true })}
+                  id="pricePerHour"
+                  type="number"
+                  placeholder="Price per Hour"
+                />
+                {errors.pricePerHour && (
+                  <span className="text-sm text-red-500 flex items-center">
+                    <MdErrorOutline className="mr-1" /> This field is required
+                  </span>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="location">Location</Label>
+                <Input
+                  {...register("location", { required: true })}
+                  id="location"
+                  type="text"
+                  placeholder="Facility Location"
+                />
+                {errors.location && (
+                  <span className="text-sm text-red-500 flex items-center">
+                    <MdErrorOutline className="mr-1" /> This field is required
+                  </span>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="imageUrl">Image URL</Label>
+                <Input
+                  {...register("imageUrl", { required: true })}
+                  id="imageUrl"
+                  type="text"
+                  placeholder="Photo URL"
+                />
+                {errors.imageUrl && (
+                  <span className="text-sm text-red-500 flex items-center">
+                    <MdErrorOutline className="mr-1" /> This field is required
+                  </span>
+                )}
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full">Add</Button>
+            </CardFooter>
+          </form>
+        </Card>
       </div>
     </>
   );

@@ -2,14 +2,14 @@ import { Calendar, Heart, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Separator } from "./ui/separator";
 
-function FacilityCard() {
+function FacilityCard({facility}) {
   return (
-    <div className=" facilityCard max-w-sm mx-3 lg:mx-0 rounded-lg shadow-lg  overflow-hidden dark:border dark:text-gray-300 ">
+    <div className="facilityCard max-w-sm mx-3 lg:mx-0 rounded-lg shadow-lg  overflow-hidden dark:border dark:text-gray-300 ">
       <div className="relative overflow-hidden">
-        <Link to={""}>
+        <Link to={`/facilities/${facility?._id}`}>
           <img
             className="w-full h-56 object-cover  duration-500 ease-in-out"
-            src="https://t4.ftcdn.net/jpg/06/45/35/87/360_F_645358788_Nr0bQp4DMUhVFFUkC5BTuy8b0pe3KtlH.jpg"
+            src={facility?.imageUrl ||  `https://t4.ftcdn.net/jpg/06/45/35/87/360_F_645358788_Nr0bQp4DMUhVFFUkC5BTuy8b0pe3KtlH.jpg`}
             alt="Sports Facility"
           />
         </Link>
@@ -17,7 +17,7 @@ function FacilityCard() {
           Featured
         </div>
         <div className="absolute top-5 right-5 bg-green-700 text-white px-2 py-1 rounded-sm text-sm font-semibold">
-          $450/hr
+          $ { facility?.pricePerHour}/hr
         </div>
       </div>
       <div className="py-4 px-4">
@@ -32,16 +32,15 @@ function FacilityCard() {
             <Heart size={18} />
           </div>
         </div>
-        <Link to={""}>
-          <h2 className=" text-2xl font-bold mb-2 truncate">Sarahg Sports Academy</h2>
+        <Link to={`/facilities/${facility?._id}`}>
+          <h2 className=" text-2xl font-bold mb-2 truncate">{ facility?.name }</h2>
         </Link>
         <p className="text-gray-500 text-sm mb-4 truncate">
-          Elevate your athletic journey at Sarah Sports Academy, where
-          excellence meets opportunity.
+          { facility?.description}
         </p>
         <div className="flex items-center text-sm font-semibold text-gray-600 mb-4">
           <MapPin size={20} className="text-gray-500 mr-2 truncate"/>
-          Port Alsworth, AK
+          {facility?.location}
         </div>
         <div className="flex items-center text-sm font-semibold text-gray-600 mb-4">
           <Calendar size={20} className="text-gray-500 mr-2"/>
