@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateFacilityMutation } from "@/redux/api/facilityApi/facilityApi";
-import { ChevronLeft, CirclePlus } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { FieldValues, useForm } from "react-hook-form";
 import { MdErrorOutline } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const AddFacility = () => {
@@ -44,6 +44,7 @@ const AddFacility = () => {
         toast.success("Facility added successfully", { id: toastId });
         reset();
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong. Try Again!", { id: toastId });
     }
@@ -52,9 +53,13 @@ const AddFacility = () => {
   return (
     <>
       <div className="mb-16 flex items-center justify-between">
-      <Button onClick={()=>navigate(-1)} className=""> <ChevronLeft size={15} className="mr-2"/>Go Back</Button>
+        <Button onClick={() => navigate(-1)} className="">
+          {" "}
+          <ChevronLeft size={15} className="mr-2" />
+          Go Back
+        </Button>
       </div>
-      
+
       <div className=" lg:max-w-2xl mx-auto">
         <Card className="w-full ">
           <CardHeader>

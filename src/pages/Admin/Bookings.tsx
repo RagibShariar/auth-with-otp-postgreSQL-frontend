@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import BookingsRows from "@/components/BookingsRows";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -33,25 +33,32 @@ const Bookings = () => {
         x-chunk="dashboard-02-chunk-1"
       >
         <Table>
-         
           <TableHeader>
             <TableRow>
-              <TableHead className="font-black bg-gray-100">Client Name</TableHead>
+              <TableHead className="font-black bg-gray-100">
+                Client Name
+              </TableHead>
               <TableHead className="font-black bg-gray-100">Email</TableHead>
               <TableHead className="font-black bg-gray-100">Contact</TableHead>
               <TableHead className="font-black bg-gray-100">Address</TableHead>
               <TableHead className="font-black bg-gray-100">Facility</TableHead>
               <TableHead className="font-black bg-gray-100">location</TableHead>
               <TableHead className="font-black bg-gray-100">Price/hr</TableHead>
-              <TableHead className="font-black bg-gray-100">Booking Status</TableHead>
+              <TableHead className="font-black bg-gray-100">
+                Booking Status
+              </TableHead>
               <TableHead className="font-black bg-gray-100">Date</TableHead>
-              <TableHead className="font-black bg-gray-100">Start Time</TableHead>
+              <TableHead className="font-black bg-gray-100">
+                Start Time
+              </TableHead>
               <TableHead className="font-black bg-gray-100">End Time</TableHead>
-              <TableHead className="font-black bg-gray-100">Payable Amount</TableHead>
+              <TableHead className="font-black bg-gray-100">
+                Payable Amount
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {bookings?.map((booking) => (
+            {bookings?.map((booking:any) => (
               <BookingsRows key={booking?._id} booking={booking} />
             ))}
           </TableBody>

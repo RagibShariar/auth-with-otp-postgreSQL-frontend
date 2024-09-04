@@ -16,7 +16,8 @@ export const useTheme = () => {
       }
     };
 
-    const handleSystemThemeChange = (e) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleSystemThemeChange = (e:any) => {
       if (theme === "system") {
         applyTheme(e.matches ? "dark" : "light");
       }

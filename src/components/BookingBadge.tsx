@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 
-const BookingBadge = ({ status }) => {
-  const getBadgeVariant = (status) => {
+const BookingBadge = ({ status }: { status: string }) => {
+  const getBadgeVariant = (status: string) => {
     switch (status) {
       case "confirmed":
         return "bg-green-600 ";

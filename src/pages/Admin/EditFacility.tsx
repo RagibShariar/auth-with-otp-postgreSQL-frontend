@@ -17,13 +17,13 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-const EditFacility = ({ facility }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const EditFacility = ({ facility }:any) => {
   const [editFacility] = useEditFacilityMutation();
   const [isOpen, setIsOpen] = useState(false);
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
 
   const handleEdit = async (data: FieldValues) => {
@@ -43,6 +43,7 @@ const EditFacility = ({ facility }) => {
         toast.success("Data updated successfully", { id: toastId });
         setIsOpen(false);
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong. Try Again!", { id: toastId });
     }

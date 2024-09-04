@@ -2,7 +2,7 @@
 // import { setTheme } from "@/redux/features/themeSlice";
 // import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useTheme } from "@/hooks/useTheme";
-import { Monitor, MoonStar, Sun, SunIcon } from "lucide-react";
+import { Monitor, MoonStar, Sun } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -10,7 +10,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { FcGoogle } from "react-icons/fc";
 
 const ThemeSwitcher = () => {
   const { setTheme } = useTheme();
@@ -35,7 +34,6 @@ const ThemeSwitcher = () => {
               className="cursor-pointer  dark:text-gray-50"
               onClick={() => setTheme("light")}
             >
-              
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 mr-3" />
               Light
             </DropdownMenuItem>

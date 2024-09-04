@@ -21,7 +21,8 @@ const VerifyOTP = () => {
   const [verifyLogin] = useVerifyLoginMutation();
   const email = localStorage.getItem("userEmail");
 
-  const handleOTP = async (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOTP = async (e: any) => {
     e.preventDefault();
     const otp = e.target.otp.value;
     const toastId = toast.loading("Logging in...");
@@ -38,7 +39,8 @@ const VerifyOTP = () => {
       toast.success("Login Successful", { id: toastId, duration: 2000 });
       navigate("/");
       localStorage.removeItem("userEmail");
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error?.data?.message, { id: toastId });
     }
   };

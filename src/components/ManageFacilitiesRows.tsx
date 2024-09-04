@@ -15,14 +15,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import EditFacility from "@/pages/Admin/EditFacility";
 import { useDeleteFacilityMutation } from "@/redux/api/facilityApi/facilityApi";
-import { Ellipsis, Pencil, Trash2 } from "lucide-react";
+import { Ellipsis, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { TableCell, TableRow } from "./ui/table";
-import EditFacility from "@/pages/Admin/EditFacility";
 
-const ManageFacilitiesRows = ({ facility, index }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ManageFacilitiesRows = ({ facility, index }: {facility:any, index:number}) => {
   const [deleteFacility] = useDeleteFacilityMutation();
 
   const handleDelete = async (id: string) => {
@@ -55,12 +56,15 @@ const ManageFacilitiesRows = ({ facility, index }) => {
               <Ellipsis size={20} />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <EditFacility facility={facility}/>
+              <EditFacility facility={facility} />
               <DropdownMenuSeparator />
 
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button className="w-full  flex justify-start" variant="ghost">
+                  <Button
+                    className="w-full  flex justify-start"
+                    variant="ghost"
+                  >
                     <Trash2 className="mr-2 h-4 w-4" /> Delete
                   </Button>
                 </AlertDialogTrigger>

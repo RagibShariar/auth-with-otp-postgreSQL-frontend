@@ -18,7 +18,7 @@ import Login from "@/pages/Auth/LoginModal";
 
 import { logOut, useCurrentToken } from "@/redux/features/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { CircleUser, Gauge, LogOut, Menu, NotebookPen } from "lucide-react";
+import { CircleUser, LogOut, Menu, NotebookPen } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import {
@@ -126,13 +126,15 @@ const Navbar = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link to="/user" className="flex"><NotebookPen size={17} className="mr-2" />
-                  Profile</Link>
+                  <Link to="/user" className="flex">
+                    <NotebookPen size={17} className="mr-2" />
+                    Profile
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogOut}>
                   <LogOut size={17} className="mr-2" />
-                    <button>Logout</button>
+                  <button>Logout</button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

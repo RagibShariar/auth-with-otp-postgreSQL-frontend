@@ -3,9 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLoginMutation } from "@/redux/api/auth/authApi";
-import { setUser, TUser, useCurrentToken } from "@/redux/features/authSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { jwtDecode } from "jwt-decode";
+import { useCurrentToken } from "@/redux/features/authSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -20,7 +19,6 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [login] = useLoginMutation();
   const token = useAppSelector(useCurrentToken);
@@ -41,15 +39,14 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(loginInfo).unwrap();
-      
+
       if (res?.success) {
         toast.success(res?.data?.message, { id: toastId, duration: 2000 });
         localStorage.setItem("userEmail", loginInfo.email);
-        navigate("/verify")
+        navigate("/verify");
       }
-
-
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error?.data?.message, { id: toastId });
     }
   };
@@ -67,7 +64,6 @@ const Login = () => {
               <Input
                 {...register("email", { required: true })}
                 type="email"
-                
                 placeholder="m@example.com"
               />
               {errors.email && (
@@ -79,7 +75,10 @@ const Login = () => {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link to="/forgot-password" className="ml-auto inline-block text-sm underline">
+                <Link
+                  to="/forgot-password"
+                  className="ml-auto inline-block text-sm underline"
+                >
                   Forgot your password?
                 </Link>
               </div>

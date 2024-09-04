@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useSignUpMutation } from "@/redux/api/auth/authApi";
-import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -10,9 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Login from "./LoginModal";
 const SignUp = () => {
-  const [signUp, { isError, isLoading, isSuccess, error }] =
-    useSignUpMutation();
-  const dispatch = useAppDispatch();
+  const [signUp] = useSignUpMutation();
   const navigate = useNavigate();
   const {
     register,
@@ -53,7 +50,8 @@ const SignUp = () => {
         localStorage.setItem("userEmail", signUpData.email);
         navigate("/verify");
       }
-    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       toast.error(error?.data?.message, { id: toastId });
     }
   };
