@@ -41,15 +41,16 @@ const Login = () => {
         password: data.password,
       };
       const res = await login(loginInfo).unwrap();
-      const user = jwtDecode(res.token) as TUser;
+      
+      if (res?.success) {
+        toast.success(res?.data?.message, { id: toastId, duration: 2000 });
+        localStorage.setItem("userEmail", loginInfo.email);
+        navigate("/verify")
+      }
 
-      console.log("login page: ",res)
 
-      dispatch(setUser({ user: user, token: res.token }));
-      toast.success("Login Successful", { id: toastId, duration: 2000 });
-      navigate("/");
-    } catch (err) {
-      toast.error("Something went wrong", { id: toastId });
+    } catch (error) {
+      toast.error(error?.data?.message, { id: toastId });
     }
   };
 
@@ -66,7 +67,7 @@ const Login = () => {
               <Input
                 {...register("email", { required: true })}
                 type="email"
-                defaultValue="ragib@gmail.com"
+                
                 placeholder="m@example.com"
               />
               {errors.email && (
@@ -78,14 +79,14 @@ const Login = () => {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link to="#" className="ml-auto inline-block text-sm underline">
+                <Link to="/forgot-password" className="ml-auto inline-block text-sm underline">
                   Forgot your password?
                 </Link>
               </div>
               <Input
                 {...register("password", { required: true })}
                 type="password"
-                defaultValue="SecurePass123!"
+                placeholder="•••••••••"
               />
               {errors.password && (
                 <span className="text-sm text-red-500 flex items-center">
@@ -98,7 +99,7 @@ const Login = () => {
             </Button>
           </div>
         </form>
-        <Button variant="outline" className="w-full ">
+        <Button variant="outline" className="w-full mt-4">
           <FcGoogle size={20} className="mr-2" />
           Login with Google
         </Button>

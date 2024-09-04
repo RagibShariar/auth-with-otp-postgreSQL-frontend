@@ -16,6 +16,7 @@ import { useLoginMutation } from "@/redux/api/auth/authApi";
 import { setUser, TUser } from "@/redux/features/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import { MdErrorOutline } from "react-icons/md";
@@ -23,6 +24,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const LoginModal = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const {
     register,
     handleSubmit,
@@ -43,20 +45,29 @@ const LoginModal = () => {
         password: data.password,
       };
       const res = await login(loginInfo).unwrap();
-      const user = jwtDecode(res.token) as TUser;
+      
 
-      console.log("login modal: ", res)
+      if (res?.success) {
+        toast.success(res?.data?.message, { id: toastId, duration: 2000 });
+        localStorage.setItem("userEmail", loginInfo.email);
+        setIsDialogOpen(false);
+        navigate("/verify")
+      }
 
-      dispatch(setUser({ user: user, token: res.token }));
-      toast.success("Login Successful", { id: toastId, duration: 2000 });
-      navigate("/");
-    } catch (err) {
-      toast.error("Something went wrong", { id: toastId });
+      // const user = jwtDecode(res.token) as TUser;
+
+      // console.log("from login modal: ", res)
+
+      // dispatch(setUser({ user: user, token: res.token }));
+      // toast.success("Login Successful", { id: toastId, duration: 2000 });
+      // navigate("/");
+    } catch (error) {
+      toast.error(error?.data?.message, { id: toastId });
     }
   };
 
   return (
-    <Dialog>
+    <Dialog  open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
         <Link to="">Login</Link>
       </DialogTrigger>
@@ -78,7 +89,7 @@ const LoginModal = () => {
               <Input
                 {...register("email", { required: true })}
                 type="email"
-                defaultValue="ragib@gmail.com"
+                
                 placeholder="m@example.com"
               />
               {errors.email && (
@@ -90,14 +101,16 @@ const LoginModal = () => {
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link to="#" className="ml-auto inline-block text-sm underline">
+                <Link
+                  onClick={() => setIsDialogOpen(false)}
+                  to="/forgot-password" className="ml-auto inline-block text-sm underline">
                   Forgot your password?
                 </Link>
               </div>
               <Input
                 {...register("password", { required: true })}
                 type="password"
-                defaultValue="SecurePass123!"
+                placeholder="•••••••••"
               />
               {errors.password && (
                 <span className="text-sm text-red-500 flex items-center">

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useSignUpMutation } from "@/redux/api/auth/authApi";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
@@ -12,6 +12,7 @@ import Login from "./LoginModal";
 const SignUp = () => {
   const [signUp, { isError, isLoading, isSuccess, error }] =
     useSignUpMutation();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -20,6 +21,7 @@ const SignUp = () => {
   } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [signUpError, setSignUpError] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -29,27 +31,30 @@ const SignUp = () => {
   };
 
   const handleSignUp = async (data: FieldValues) => {
+    const { name, email, password, confirmPassword } = data;
+    const signUpData = { name, email, password };
+
+    // reset error message
+    setSignUpError("");
+
+    if (password !== confirmPassword) {
+      setSignUpError("password doesn't match");
+      return;
+    }
+
     const toastId = toast.loading("Signing up...");
 
     try {
-      const { name, email, password } = data;
-      const signUpData = { name, email, password };
       // console.log(signUpData)
-      const res = await signUp(signUpData);
+      const res = await signUp(signUpData).unwrap();
 
-      if ((res.error as FetchBaseQueryError)?.data?.success === false) {
-        toast.error("This email already exists. Please Log in", {
-          id: toastId,
-        });
-      } else {
-        toast.success("Sign Up Successful. Please Login", {
-          id: toastId,
-          duration: 2000,
-        });
-        navigate("/login");
+      if (res?.success) {
+        toast.success(res?.data?.message, { id: toastId, duration: 2000 });
+        localStorage.setItem("userEmail", signUpData.email);
+        navigate("/verify");
       }
     } catch (error) {
-      toast.error("Something went wrong", { id: toastId });
+      toast.error(error?.data?.message, { id: toastId });
     }
   };
 
@@ -151,16 +156,16 @@ const SignUp = () => {
                   className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
                   placeholder="Enter password"
                 />
-                <button
-                  className="btn text-gray-400 absolute right-3 bottom-3 flex items-center text-sm leading-5 bg-transparent border-none shadow-none hover:bg-transparent"
+                <span
+                  className=" text-gray-400 absolute right-3 bottom-3 flex items-center text-sm leading-5 bg-transparent border-none shadow-none hover:bg-transparent "
                   onClick={togglePasswordVisibility}
                 >
                   {passwordVisible ? (
-                    <RxEyeOpen className="w-4 h-4 right-4 cursor-pointer" />
+                    <RxEyeOpen className="w-4 h-4 right-4 cursor-pointer " />
                   ) : (
                     <RxEyeClosed className="w-4 h-4 right-4 cursor-pointer" />
                   )}
-                </button>
+                </span>
               </div>
               {errors.password && (
                 <span className="mt-2 text-sm text-red-500 flex items-center">
@@ -179,7 +184,7 @@ const SignUp = () => {
                   className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
                   placeholder="Confirm password"
                 />
-                <button
+                <span
                   className="btn text-gray-400 absolute right-3 bottom-3 flex items-center text-sm leading-5 bg-transparent border-none shadow-none hover:bg-transparent"
                   onClick={toggleConfirmPasswordVisibility}
                 >
@@ -188,7 +193,7 @@ const SignUp = () => {
                   ) : (
                     <RxEyeClosed className="w-4 h-4 right-4 cursor-pointer" />
                   )}
-                </button>
+                </span>
               </div>
               {errors.name && (
                 <span className="mt-2 text-sm text-red-500 flex items-center">
@@ -227,13 +232,13 @@ const SignUp = () => {
             </div>
           </div>
           <div>
-            {/* {registerError && (
-            <p className="mt-6 text-red-500 text-sm font-medium leading-6">
-              {registerError}
-            </p>
-          )} */}
+            {signUpError && (
+              <p className="mt-2 text-red-500 text-sm font-medium leading-6">
+                {signUpError}
+              </p>
+            )}
           </div>
-          <div className="mt-8">
+          <div className="mt-4">
             <Button
               type="submit"
               className="w-full px-4 py-3 text-sm font-semibold text-white bg-gradient focus:outline-none"

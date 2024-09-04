@@ -15,10 +15,12 @@ import { format } from "date-fns";
 import { Calendar } from "./ui/calendar";
 import { toast } from "sonner";
 import { useCreateBookingMutation } from "@/redux/api/bookingsApi/bookingsApi";
+import { Link, useNavigate } from "react-router-dom";
 
 const BookingFacility = ({ facility }) => {
   const { _id} = facility;
   const [createBooking] = useCreateBookingMutation();
+  const navigate = useNavigate();
 
   const [date, setDate] = useState<Date>();
   const [startTime, setStartTime] = useState("");
@@ -56,18 +58,18 @@ const BookingFacility = ({ facility }) => {
       endTime: endTime
     }
 
-    console.log(bookingInfo)
 
     const res = await createBooking(bookingInfo);
 
     // Add your booking logic here
       // After successful booking
-      console.log(res)
       if (res?.data?.success === true) {
         toast.success("Booking confirmed!");
+        navigate("/checkout");
       }
       if (res?.error?.data?.success === false) { 
         toast.error(res?.error?.data?.message);
+        navigate("/login");
       }
     } catch (error) {
       toast.error("Something went wrong");
@@ -139,7 +141,7 @@ const BookingFacility = ({ facility }) => {
       </div>
 
         <div>
-        <Button>Confirm Booking</Button>
+          <Button>Confirm Booking</Button>
       </div>
         
         </form>

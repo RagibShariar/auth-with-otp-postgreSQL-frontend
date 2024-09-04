@@ -126,7 +126,7 @@ const Navbar = () => {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link to="/profile" className="flex"><NotebookPen size={17} className="mr-2" />
+                  <Link to="/user" className="flex"><NotebookPen size={17} className="mr-2" />
                   Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
