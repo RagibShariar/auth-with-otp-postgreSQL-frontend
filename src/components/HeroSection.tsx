@@ -5,7 +5,7 @@ import heroImage1 from "../assets/images/hero/banner-right.png";
 const HeroSection = () => {
   return (
     <>
-      <section className="bg-hero bg-bottom bg-cover w-full  py-12 ">
+      <section className="hero bg-bottom bg-cover w-full  py-12 ">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 relative">
           <div className="flex flex-col justify-center px-4 mb-8 lg:mb-0">
             <h4 className="text-[#aaf40c] lg:text-xl mb-2 ">

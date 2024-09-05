@@ -75,3 +75,9 @@
   scale: 1.1;
 }
 
+.hero {
+  background-image: url("../src/assets/images/hero/hero-banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

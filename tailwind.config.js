@@ -22,8 +22,8 @@ module.exports = {
         Outfit: ["Outfit", "sans-serif"],
       },
       backgroundImage: {
-        hero: "url('./src/assets/images/hero/hero-banner.jpg')",
-        gradient: "linear-gradient(105.55deg,#085a6c -6.68%,#269089 43.13%,#7abc82 96.15%)",
+        gradient:
+          "linear-gradient(105.55deg,#085a6c -6.68%,#269089 43.13%,#7abc82 96.15%)",
       },
       colors: {
         border: "hsl(var(--border))",

@@ -16,10 +16,10 @@ import { Label } from "@/components/ui/label";
 import { useLoginMutation } from "@/redux/api/auth/authApi";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { MdErrorOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import GoogleSignIn from "./GoogleSignIn";
 
 const LoginModal = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -119,10 +119,10 @@ const LoginModal = () => {
             </Button>
           </div>
         </form>
-        <Button variant="outline" className="w-full ">
-          <FcGoogle size={20} className="mr-2" />
-          Login with Google
-        </Button>
+
+        <div className="-mt-5">
+          <GoogleSignIn />
+        </div>
         <div className="mt-4 text-center text-sm flex items-center justify-center">
           <DialogFooter>
             Don&apos;t have an account?{" "}

@@ -7,10 +7,10 @@ import { useCurrentToken } from "@/redux/features/authSlice";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { MdErrorOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import GoogleSignIn from "./GoogleSignIn";
 
 const Login = () => {
   const {
@@ -98,10 +98,7 @@ const Login = () => {
             </Button>
           </div>
         </form>
-        <Button variant="outline" className="w-full mt-4">
-          <FcGoogle size={20} className="mr-2" />
-          Login with Google
-        </Button>
+        <GoogleSignIn />
         <div className="mt-4 text-center text-sm flex items-center justify-center">
           <div>
             Don&apos;t have an account?{" "}

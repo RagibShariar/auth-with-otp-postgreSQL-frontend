@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button";
 import { useSignUpMutation } from "@/redux/api/auth/authApi";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { FcGoogle } from "react-icons/fc";
 import { MdErrorOutline } from "react-icons/md";
 import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import GoogleSignIn from "./GoogleSignIn";
 import Login from "./LoginModal";
 const SignUp = () => {
   const [signUp] = useSignUpMutation();
@@ -47,8 +47,8 @@ const SignUp = () => {
 
       if (res?.success) {
         toast.success(res?.data?.message, { id: toastId, duration: 2000 });
-        localStorage.setItem("userEmail", signUpData.email);
-        navigate("/verify");
+        // localStorage.setItem("userEmail", signUpData.email);
+        navigate("/login");
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -243,12 +243,7 @@ const SignUp = () => {
             >
               Create Account
             </Button>
-            <div className="mt-5">
-              <Button variant="outline" className="w-full">
-                <FcGoogle size={20} className="mr-2" />
-                Login with Google
-              </Button>
-            </div>
+            <GoogleSignIn />
           </div>
           <p className="mt-6 text-sm text-center dark:text-gray-900">
             Already have an account?

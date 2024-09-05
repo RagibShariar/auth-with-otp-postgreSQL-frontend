@@ -1,9 +1,10 @@
-import MainLayout from "@/layout/MainLayout";
 import UserDashboardLayout from "@/layout/UserDashboardLayout";
 import AboutUs from "@/pages/AboutUs/AboutUs";
 import { Dashboard } from "@/pages/Admin/Dashboard";
+import ForgotPassword from "@/pages/Auth/ForgotPassword";
 import Login from "@/pages/Auth/Login";
 import LoginModal from "@/pages/Auth/LoginModal";
+import ResetPassword from "@/pages/Auth/ResetPassword";
 import SignUp from "@/pages/Auth/SignUp";
 import VerifyOTP from "@/pages/Auth/VerifyOTP";
 import Checkout from "@/pages/Checkout/Checkout";
@@ -17,8 +18,7 @@ import Home from "../pages/Home/Home";
 import { adminPaths } from "./admin.routes";
 import AdminRoutes from "./AdminRoutes";
 import ProtectedRoutes from "./ProtectedRoutes";
-import ForgotPassword from "@/pages/Auth/ForgotPassword";
-import ResetPassword from "@/pages/Auth/ResetPassword";
+import MainLayout from "@/layout/MainLayout";
 
 export const router = createBrowserRouter([
   {

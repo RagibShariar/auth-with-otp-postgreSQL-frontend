@@ -1,7 +1,9 @@
+import { useAppSelector } from "@/redux/hooks";
 import { Home } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const UserDashboardLeftBar = () => {
+  const { user } = useAppSelector((state) => state.auth);
   return (
     <>
       <div className="col-span-3  h-screen">
@@ -14,15 +16,16 @@ const UserDashboardLeftBar = () => {
             />
           </div>
           <div className="text-center">
-            <h4 className=" font-semibold text-xl">Ragib Shariar</h4>
-            <p>srragib@gmail.com</p>
+            <h4 className=" font-semibold text-xl">{user?.email}</h4>
+            {/* <p>{ user?.email}</p> */}
           </div>
         </div>
         <div>
           <div className="mt-5">
             <nav className="grid items-start text-sm font-medium lg:px-0">
               <NavLink
-                to="" end
+                to=""
+                end
                 className={({ isActive }) =>
                   `flex items-center gap-3 rounded-lg px-3 mt-1 py-2  transition-all hover:bg-gradient hover:text-white text-lg ${
                     isActive ? "bg-gradient text-white" : ""
