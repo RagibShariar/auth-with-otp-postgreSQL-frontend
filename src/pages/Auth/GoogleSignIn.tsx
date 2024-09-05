@@ -13,12 +13,14 @@ const GoogleSignIn = () => {
   const navigate = useNavigate();
 
   const api = axios.create({
-    baseURL: "https://sports-facilit-booking-platform.vercel.app/api",
+    // baseURL: "https://sports-facilit-booking-platform.vercel.app/api",
+    // baseURL: "http://localhost:5000/api",
+    baseURL: "https://googleapi.labontest.tech",
   });
   const googleAuth = (code: string) => api.get(`/auth/google?code=${code}`);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const responseGoogle = async (authResult:any) => {
+  const responseGoogle = async (authResult: any) => {
     try {
       // console.log(authResult);
       if (authResult["code"]) {
