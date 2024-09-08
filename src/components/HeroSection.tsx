@@ -1,6 +1,7 @@
 import bannerCock1 from "../assets/images/hero/banner-cock1.svg";
 import bannerCock2 from "../assets/images/hero/banner-cock2.svg";
 import heroImage1 from "../assets/images/hero/banner-right.png";
+import '@/index.css'
 
 const HeroSection = () => {
   return (
@@ -19,7 +20,7 @@ const HeroSection = () => {
             <p className="text-white text-base ">
               Play Without Limits. Easily find and book the best sports
               facilities around you. From fields to courts, secure your spot
-              today.
+              today. Solar-ICT.
             </p>
           </div>
           <div className=" text-center ">

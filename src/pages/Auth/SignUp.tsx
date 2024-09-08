@@ -57,30 +57,30 @@ const SignUp = () => {
   };
 
   return (
-    <section className="lg:mt-16 lg:w-[550px] md:w-1/2 mx-auto lg:border lg:rounded-xl lg:shadow-md bg-gradient">
-      <div className="bg-white lg:m-1 lg:rounded-lg">
+    <section className=" lg:mt-16 lg:w-[550px] md:w-1/2 mx-auto lg:border lg:rounded-xl lg:shadow-md bg-gradient">
+      <div className="bg-white lg:m-1 lg:rounded-lg dark:bg-slate-900 ">
         <form
           onSubmit={handleSubmit(handleSignUp)}
           className="px-4 py-5 mx-auto "
         >
-          <div className="mb-8">
-            <h3 className="text-3xl font-extrabold dark:text-gray-900">
+          <div className="mb-8 ">
+            <h3 className="text-3xl font-extrabold dark:text-gray-200">
               Register
             </h3>
-            <p className="mt-3 text-balance text-muted-foreground">
+            <p className="mt-3 text-balance text-muted-foreground ">
               Enter your information to create an account
             </p>
           </div>
           <div className="space-y-6 ">
             <div>
-              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900">
+              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
                 Name
               </label>
-              <div className="relative flex items-center">
+              <div className="relative flex items-center ">
                 <input
                   {...register("name", { required: true })}
                   type="text"
-                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
+                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500 dark:bg-slate-900"
                   placeholder="Enter name"
                 />
                 <svg
@@ -101,14 +101,14 @@ const SignUp = () => {
               )}
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900">
+              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
                 Email Id
               </label>
               <div className="relative flex items-center">
                 <input
                   {...register("email", { required: true })}
                   type="email"
-                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
+                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500 dark:bg-slate-900"
                   placeholder="Enter email"
                 />
                 <svg
@@ -144,14 +144,14 @@ const SignUp = () => {
               )}
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900">
+              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
                 Password
               </label>
               <div className="relative ">
                 <input
                   {...register("password", { required: true })}
                   type={passwordVisible ? "text" : "password"}
-                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
+                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500 dark:bg-slate-900"
                   placeholder="Enter password"
                 />
                 <span
@@ -172,14 +172,14 @@ const SignUp = () => {
               )}
             </div>
             <div>
-              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900">
+              <label className="block mb-2 text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
                 Confirm Password
               </label>
               <div className="relative ">
                 <input
                   {...register("confirmPassword", { required: true })}
                   type={confirmPasswordVisible ? "text" : "password"}
-                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500"
+                  className="w-full py-2.5 pl-4 pr-10 text-sm border border-gray-300 rounded outline-blue-500 dark:bg-slate-900"
                   placeholder="Confirm password"
                 />
                 <span
@@ -206,11 +206,11 @@ const SignUp = () => {
                   id="termAndConditions"
                   {...register("termsAndConditions", { required: true })}
                   type="checkbox"
-                  className="w-4 h-4 border-gray-300 rounded text-blue-600 focus:ring-blue-500 shrink-0"
+                  className="w-4 h-4 border-gray-300 rounded text-blue-600 focus:ring-blue-500 shrink-0 "
                 />
                 <label
                   htmlFor="termAndConditions"
-                  className="block ml-3 text-sm dark:text-gray-900"
+                  className="block ml-3 text-sm dark:text-gray-900 dark:text-gray-200"
                 >
                   I accept the
                   <a
@@ -236,16 +236,16 @@ const SignUp = () => {
               </p>
             )}
           </div>
-          <div className="mt-4">
+          <div className="mt-4 ">
             <Button
               type="submit"
-              className="w-full px-4 py-3 text-sm font-semibold text-white bg-gradient focus:outline-none"
+              className="w-full px-4 py-3 text-sm font-semibold text-white bg-gradient focus:outline-none "
             >
               Create Account
             </Button>
             <GoogleSignIn />
           </div>
-          <p className="mt-6 text-sm text-center dark:text-gray-900">
+          <p className="mt-6 text-sm text-center dark:text-gray-900 dark:text-gray-200">
             Already have an account?
             <span className="ml-1 font-semibold text-blue-600 hover:underline">
               {" "}
