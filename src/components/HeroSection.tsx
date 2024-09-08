@@ -13,7 +13,7 @@ const HeroSection = () => {
             </h4>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6 font-sans text-white">
               {" "}
-              Discover and <span className="text-[#aaf40c]">Reserve</span> Top
+              Discover 1 and <span className="text-[#aaf40c]">Reserve</span> Top
               Sports Venues!
             </h1>
             <p className="text-white text-base ">
