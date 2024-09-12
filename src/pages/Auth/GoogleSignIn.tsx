@@ -15,7 +15,7 @@ const GoogleSignIn = () => {
   const api = axios.create({
     // baseURL: "https://sports-facilit-booking-platform.vercel.app/api",
     // baseURL: "http://localhost:5000/api",
-    baseURL: "https://googleapi.labontest.tech/api",
+    baseURL: "https://authpostgresql.labontest.tech/api",
   });
   const googleAuth = (code: string) => api.get(`/auth/google?code=${code}`);
 
